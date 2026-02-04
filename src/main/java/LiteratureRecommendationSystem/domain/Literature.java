@@ -1,4 +1,3 @@
-
 package main.java.LiteratureRecommendationSystem.domain;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public abstract class Literature implements Identifiable {
             throw new IllegalArgumentException("Popis nesmie byť prázdny");
         }
         int currentYear = Year.now().getValue();
-        if (releaseDate == 0 || releaseDate > currentYear) {
+        if (releaseDate <= 0 || releaseDate > currentYear) {
             throw new IllegalArgumentException("Neplatný rok vydania");
         }
         if (linkBook == null || linkBook.isBlank()) {

@@ -1,13 +1,11 @@
 package main.java.LiteratureRecommendationSystem.repository;
 
 import main.java.LiteratureRecommendationSystem.domain.Identifiable;
-
 import java.util.*;
 
 public abstract class InMemoryRepository<T extends Identifiable> implements Repository<T> {
 
     private final Map<String, T> byId = new HashMap<>();
-
 
     @Override
     public void add(T item) {

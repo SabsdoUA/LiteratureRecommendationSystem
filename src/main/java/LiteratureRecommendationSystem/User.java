@@ -10,7 +10,7 @@ public class User {
             throw new IllegalArgumentException("Meno nesmie byť prázdne");
         }
         if (age <= 0) {
-            throw new IllegalArgumentException("Vek menej ako 0");
+            throw new IllegalArgumentException("Vek musí byť väčší ako 0");
         }
 
         this.name = name;
