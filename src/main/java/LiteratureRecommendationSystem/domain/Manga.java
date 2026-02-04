@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.domain.model;
+package main.java.LiteratureRecommendationSystem.domain;
 
 public class Manga extends Literature {
 

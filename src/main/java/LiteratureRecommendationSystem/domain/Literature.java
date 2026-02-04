@@ -1,9 +1,10 @@
-package main.java.LiteratureRecommendationSystem.domain.model;
+
+package main.java.LiteratureRecommendationSystem.domain;
 
 import java.util.UUID;
 import java.time.Year;
 
-public abstract class Literature {
+public abstract class Literature implements Identifiable {
 
     protected final String id;
     protected String genre;
