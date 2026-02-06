@@ -49,7 +49,7 @@ public abstract class InMemoryRepository<T extends Identifiable> implements Repo
 
     @Override
     public void clear() {
-
+        byId.clear();
     }
 
     private String requireValidId(T item) {
