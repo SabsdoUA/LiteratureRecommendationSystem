@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.User;
+package LiteratureRecommendationSystem.User;
 
 import java.util.Scanner;
 
@@ -15,9 +15,18 @@ public class UserFactory {
         String name = scanner.nextLine();
 
         System.out.println("Zadaj vek: ");
-        int age = scanner.nextInt();
+        int age = readInt();
 
-        scanner.nextLine();
         return new User(name, age);
+    }
+
+    private int readInt() {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Prosím, zadajte iba číslo.");
+            scanner.nextLine();
+        }
+        int value = scanner.nextInt();
+        scanner.nextLine();
+        return value;
     }
 }

@@ -1,6 +1,6 @@
-package main.java.LiteratureRecommendationSystem.service;
+package LiteratureRecommendationSystem.service;
 
-import main.java.LiteratureRecommendationSystem.User.User;
+import LiteratureRecommendationSystem.User.User;
 
 public class DataForFilter {
     private final int selectionLiterature;

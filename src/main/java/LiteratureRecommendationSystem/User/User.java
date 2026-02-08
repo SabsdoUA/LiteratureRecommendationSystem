@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.User;
+package LiteratureRecommendationSystem.User;
 
 public class User {
 

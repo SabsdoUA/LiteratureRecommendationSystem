@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.domain;
+package LiteratureRecommendationSystem.domain;
 
 import java.util.UUID;
 import java.time.Year;

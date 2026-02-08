@@ -1,6 +1,6 @@
-package main.java.LiteratureRecommendationSystem.repository;
+package LiteratureRecommendationSystem.repository;
 
-import main.java.LiteratureRecommendationSystem.domain.Literature;
+import LiteratureRecommendationSystem.domain.Literature;
 
 public class LiteratureRepository extends InMemoryRepository<Literature> {
     public LiteratureRepository() {

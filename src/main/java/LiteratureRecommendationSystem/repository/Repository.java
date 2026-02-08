@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.repository;
+package LiteratureRecommendationSystem.repository;
 
 import java.util.List;
 
