@@ -119,6 +119,7 @@ final class LiteratureRepositorySeed {
             repository.add(supplier.get());
             return 0;
         } catch (RuntimeException ex) {
+            System.err.println("Zlyhalo pridanie literatúry do seed-u: " + ex.getMessage());
             return 1;
         }
     }
