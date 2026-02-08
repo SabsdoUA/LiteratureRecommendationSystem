@@ -1,18 +1,17 @@
-package main.java.LiteratureRecommendationSystem;
+package main.java.LiteratureRecommendationSystem.User;
 
 public class User {
 
-    private final int age;
     private final String name;
+    private final int age;
 
-    public User(int age, String name) {
+    public User(String name, int age) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Meno nesmie byť prázdne");
         }
         if (age <= 0) {
             throw new IllegalArgumentException("Vek musí byť väčší ako 0");
         }
-
         this.name = name;
         this.age = age;
     }
