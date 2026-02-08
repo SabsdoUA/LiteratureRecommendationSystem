@@ -90,19 +90,18 @@ public class InputForFilter {
     }
 
     private RecencyCategory readRecency() {
-        Map<Integer, RecencyCategory> recencyByChoice = Map.of(
-                1, RecencyCategory.NEW,
-                2, RecencyCategory.MID,
-                3, RecencyCategory.OLD
-        );
-        java.util.function.IntFunction<RecencyCategory> mapper = choice -> recencyByChoice.get(choice);
         while (true) {
             int recencyChoice = readInt();
-            RecencyCategory recency = mapper.apply(recencyChoice);
-            if (recency != null) {
-                return recency;
+            switch (recencyChoice) {
+                case 1:
+                    return RecencyCategory.NEW;
+                case 2:
+                    return RecencyCategory.MID;
+                case 3:
+                    return RecencyCategory.OLD;
+                default:
+                    System.out.println("Neplatná voľba obdobia podľa roku vydania. Skúste znova.");
             }
-            System.out.println("Neplatná voľba obdobia podľa roku vydania. Skúste znova.");
         }
     }
 }
