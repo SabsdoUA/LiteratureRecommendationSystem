@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.domain;
+package LiteratureRecommendationSystem.domain;
 
 public class Encyclopedia extends Literature {
 

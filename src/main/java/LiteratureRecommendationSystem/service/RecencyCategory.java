@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem.service;
+package LiteratureRecommendationSystem.service;
 
 public enum RecencyCategory {
     NEW,

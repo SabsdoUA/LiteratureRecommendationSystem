@@ -1,6 +1,6 @@
-package main.java.LiteratureRecommendationSystem.service;
+package LiteratureRecommendationSystem.service;
 
-import main.java.LiteratureRecommendationSystem.User.User;
+import LiteratureRecommendationSystem.User.User;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -74,13 +74,7 @@ public class InputForFilter {
                         "3. Stará literatúra (5 rokov a viac)"
         );
 
-        int recencyChoice = readInt();
-        RecencyCategory recency = switch (recencyChoice) {
-            case 1 -> RecencyCategory.NEW;
-            case 2 -> RecencyCategory.MID;
-            case 3 -> RecencyCategory.OLD;
-            default -> throw new IllegalArgumentException("Neplatná voľba obdobia podľa roku vydania.");
-        };
+        RecencyCategory recency = readRecency();
 
         return new DataForFilter(selectionLiterature, ageRating, genre, recency, user);
     }
@@ -93,5 +87,22 @@ public class InputForFilter {
         int value = scanner.nextInt();
         scanner.nextLine();
         return value;
+    }
+
+    private RecencyCategory readRecency() {
+        Map<Integer, RecencyCategory> recencyByChoice = Map.of(
+                1, RecencyCategory.NEW,
+                2, RecencyCategory.MID,
+                3, RecencyCategory.OLD
+        );
+        java.util.function.IntFunction<RecencyCategory> mapper = choice -> recencyByChoice.get(choice);
+        while (true) {
+            int recencyChoice = readInt();
+            RecencyCategory recency = mapper.apply(recencyChoice);
+            if (recency != null) {
+                return recency;
+            }
+            System.out.println("Neplatná voľba obdobia podľa roku vydania. Skúste znova.");
+        }
     }
 }

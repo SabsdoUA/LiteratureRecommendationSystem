@@ -1,6 +1,6 @@
-package main.java.LiteratureRecommendationSystem.repository;
+package LiteratureRecommendationSystem.repository;
 
-import main.java.LiteratureRecommendationSystem.domain.Identifiable;
+import LiteratureRecommendationSystem.domain.Identifiable;
 import java.util.*;
 
 public abstract class InMemoryRepository<T extends Identifiable> implements Repository<T> {

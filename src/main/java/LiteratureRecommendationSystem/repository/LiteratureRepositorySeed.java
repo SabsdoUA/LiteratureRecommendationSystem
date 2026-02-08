@@ -1,9 +1,9 @@
-package main.java.LiteratureRecommendationSystem.repository;
+package LiteratureRecommendationSystem.repository;
 
-import main.java.LiteratureRecommendationSystem.domain.Literature;
-import main.java.LiteratureRecommendationSystem.domain.Book;
-import main.java.LiteratureRecommendationSystem.domain.Manga;
-import main.java.LiteratureRecommendationSystem.domain.Encyclopedia;
+import LiteratureRecommendationSystem.domain.Literature;
+import LiteratureRecommendationSystem.domain.Book;
+import LiteratureRecommendationSystem.domain.Manga;
+import LiteratureRecommendationSystem.domain.Encyclopedia;
 
 import java.util.function.Supplier;
 

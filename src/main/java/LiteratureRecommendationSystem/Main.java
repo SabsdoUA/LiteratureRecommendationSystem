@@ -1,4 +1,4 @@
-package main.java.LiteratureRecommendationSystem;
+package LiteratureRecommendationSystem;
 
 public class Main {
     public static void main(String[] args) {
