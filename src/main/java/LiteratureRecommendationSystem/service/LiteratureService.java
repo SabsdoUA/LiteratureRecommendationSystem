@@ -25,7 +25,7 @@ public class LiteratureService {
             throw new IllegalArgumentException("Limit musí byť kladné číslo.");
         }
         if (isPureRandom(filter)) {
-            return pickRandomRecommendation(limit);
+            return pickRandomRecommendation(filter, limit);
         }
 
         UserPreferences preferences = UserPreferences.from(filter);
@@ -41,13 +41,16 @@ public class LiteratureService {
         return filter.getSelectionLiterature() == 4 && filter.getGenre() == 0;
     }
 
-    private List<Literature> pickRandomRecommendation(int limit) {
-        List<Literature> all = repository.findAll();
-        if (all.isEmpty()) {
+    private List<Literature> pickRandomRecommendation(DataForFilter filter, int limit) {
+        int userAge = filter.getUser().getAge();
+        List<Literature> eligible = repository.findAll().stream()
+                .filter(literature -> literature.getAgeLimit() <= userAge)
+                .collect(Collectors.toList());
+        if (eligible.isEmpty()) {
             return List.of();
         }
-        java.util.Collections.shuffle(all);
-        return all.stream().limit(limit).collect(Collectors.toList());
+        java.util.Collections.shuffle(eligible);
+        return eligible.stream().limit(limit).collect(Collectors.toList());
     }
 
     private Predicate<Literature> buildEligibility(UserPreferences preferences) {
