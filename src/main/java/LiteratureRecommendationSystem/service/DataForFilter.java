@@ -29,7 +29,7 @@ public class DataForFilter {
         int maxGenre;
         switch (selectionLiterature) {
             case 1, 2 -> maxGenre = 5;
-            case 3 -> maxGenre = 29; // <-- важливо
+            case 3 -> maxGenre = 29;
             case 4 -> maxGenre = 0;
             default -> throw new IllegalArgumentException("Neplatná voľba typu literatúry.");
         }
