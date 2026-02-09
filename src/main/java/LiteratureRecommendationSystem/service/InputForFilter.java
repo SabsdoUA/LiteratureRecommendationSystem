@@ -9,12 +9,12 @@ import java.util.Scanner;
 public class InputForFilter {
 
     private final Scanner scanner;
+
     public InputForFilter(Scanner scanner) {
         this.scanner = scanner;
     }
 
     public DataForFilter create(User user) {
-
         System.out.println(
                 "Vyberte si typ literatúry, ktorú si želáte čítať.\n" +
                         "Prosím, zadajte číslo, ktoré zodpovedá zvolenej možnosti:\n\n" +
@@ -23,6 +23,10 @@ public class InputForFilter {
                         "3. Encyklopédie\n" +
                         "4. Náhodný výber literatúry");
         int selectionLiterature = readInt();
+
+        if (selectionLiterature == 4) {
+            return new DataForFilter(selectionLiterature, user.getAge(), 0, RecencyCategory.NEW, user);
+        }
 
         System.out.println(
                 "Zadajte vekové hodnotenie literatúry, ktorú si želáte čítať.\n" +
@@ -35,24 +39,22 @@ public class InputForFilter {
                 3, GenreCatalog.GENRES.getOrDefault(LiteratureService.LiteratureType.ENCYCLOPEDIA, List.of()));
         int genre = 0;
 
-        if (selectionLiterature != 4) {
-            List<String> availableGenres = genresByType.get(selectionLiterature);
+        List<String> availableGenres = genresByType.get(selectionLiterature);
 
-            if (availableGenres == null) {
-                System.out.println("Neplatná voľba typu literatúry.");
-                genre = 0;
-            } else {
-                System.out.println("\nVyberte si žáner (zadajte číslo):");
-                for (int i = 0; i < availableGenres.size(); i++) {
-                    System.out.println((i + 1) + ". " + availableGenres.get(i));
-                }
+        if (availableGenres == null) {
+            System.out.println("Neplatná voľba typu literatúry.");
+            genre = 0;
+        } else {
+            System.out.println("\nVyberte si žáner (zadajte číslo):");
+            for (int i = 0; i < availableGenres.size(); i++) {
+                System.out.println((i + 1) + ". " + availableGenres.get(i));
+            }
 
-                int genreChoice = readInt();
-                genre = (genreChoice >= 1 && genreChoice <= availableGenres.size()) ? genreChoice : 0;
+            int genreChoice = readInt();
+            genre = (genreChoice >= 1 && genreChoice <= availableGenres.size()) ? genreChoice : 0;
 
-                if (genre == 0) {
-                    System.out.println("Neplatná voľba žánru. Žáner nebude použitý.");
-                }
+            if (genre == 0) {
+                System.out.println("Neplatná voľba žánru. Žáner nebude použitý.");
             }
         }
 
