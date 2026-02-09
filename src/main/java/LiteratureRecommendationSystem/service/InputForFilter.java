@@ -1,6 +1,7 @@
 package LiteratureRecommendationSystem.service;
 
 import LiteratureRecommendationSystem.User.User;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,7 +9,6 @@ import java.util.Scanner;
 public class InputForFilter {
 
     private final Scanner scanner;
-
     public InputForFilter(Scanner scanner) {
         this.scanner = scanner;
     }
@@ -21,31 +21,20 @@ public class InputForFilter {
                         "1. Knihy\n" +
                         "2. Manga\n" +
                         "3. Encyklopédie\n" +
-                        "4. Náhodný výber literatúry"
-        );
+                        "4. Náhodný výber literatúry");
         int selectionLiterature = readInt();
-
 
         System.out.println(
                 "Zadajte vekové hodnotenie literatúry, ktorú si želáte čítať.\n" +
-                        "Prosím, zadajte iba číslo od 0 do 18 (napríklad: 12, 16, 18)."
-        );
+                        "Prosím, zadajte iba číslo od 0 do 18 (napríklad: 12, 16, 18).");
         int ageRating = readInt();
 
         Map<Integer, List<String>> genresByType = Map.of(
-                1, List.of("Detektívka", "Klasika", "Román", "Rozprávka", "Sci-fi"),
-                2, List.of("Josei", "Seinen", "Shojo", "Shonen", "Sports"),
-                3, List.of(
-                        "Architektúra", "Astronómia", "Biologia", "Chémia", "Dinosaurus",
-                        "Ekonomika", "Film", "Filozofia", "Fyzika", "Geografia",
-                        "História", "Hudba", "Jazykoveda", "Kuchárska", "Literatúra",
-                        "Matematika", "Medicína", "Mytológia", "Náboženstvo", "Právo",
-                        "Príroda", "Psychológia", "Šport", "Technika", "Umenie",
-                        "Veda", "Vojenstvo", "Zdravie", "Zoológia"
-                )
-        );
-
+                1, GenreCatalog.GENRES.getOrDefault(LiteratureService.LiteratureType.BOOK, List.of()),
+                2, GenreCatalog.GENRES.getOrDefault(LiteratureService.LiteratureType.MANGA, List.of()),
+                3, GenreCatalog.GENRES.getOrDefault(LiteratureService.LiteratureType.ENCYCLOPEDIA, List.of()));
         int genre = 0;
+
         if (selectionLiterature != 4) {
             List<String> availableGenres = genresByType.get(selectionLiterature);
 
@@ -71,8 +60,7 @@ public class InputForFilter {
                 "\nVyberte obdobie podľa roku vydania:\n" +
                         "1. Nová literatúra (posledné 2 roky)\n" +
                         "2. Stredná literatúra (3–4 roky)\n" +
-                        "3. Stará literatúra (5 rokov a viac)"
-        );
+                        "3. Stará literatúra (5 rokov a viac)");
 
         RecencyCategory recency = readRecency();
 

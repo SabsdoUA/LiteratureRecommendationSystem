@@ -5,9 +5,7 @@ import LiteratureRecommendationSystem.repository.Repository;
 
 import java.time.Year;
 import java.util.Comparator;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -27,7 +25,7 @@ public class LiteratureService {
             throw new IllegalArgumentException("Limit musí byť kladné číslo.");
         }
         if (isPureRandom(filter)) {
-            return pickRandomRecommendation();
+            return pickRandomRecommendation(limit);
         }
 
         UserPreferences preferences = UserPreferences.from(filter);
@@ -43,18 +41,19 @@ public class LiteratureService {
         return filter.getSelectionLiterature() == 4 && filter.getGenre() == 0;
     }
 
-    private List<Literature> pickRandomRecommendation() {
+    private List<Literature> pickRandomRecommendation(int limit) {
         List<Literature> all = repository.findAll();
         if (all.isEmpty()) {
             return List.of();
         }
-        Literature literature = all.get(java.util.concurrent.ThreadLocalRandom.current().nextInt(all.size()));
-        return List.of(literature);
+        java.util.Collections.shuffle(all);
+        return all.stream().limit(limit).collect(Collectors.toList());
     }
 
     private Predicate<Literature> buildEligibility(UserPreferences preferences) {
 
-        Predicate<Literature> byAge = literature -> literature.getAgeLimit() <= preferences.userAge();
+        Predicate<Literature> byAge = literature -> literature.getAgeLimit() <= preferences.userAge()
+                && literature.getAgeLimit() <= preferences.ageRating();
 
         Predicate<Literature> byType = preferences.type()
                 .<Predicate<Literature>>map(type -> literature -> type.matches(literature))
@@ -80,7 +79,6 @@ public class LiteratureService {
 
     private record UserPreferences(Optional<LiteratureType> type, Optional<String> genre,
                                    int ageRating, RecencyCategory recency, int userAge) {
-
         private static UserPreferences from(DataForFilter filter) {
             Optional<LiteratureType> type = LiteratureType.fromSelection(filter.getSelectionLiterature());
             return new UserPreferences(type, resolveGenre(type, filter.getGenre()),
@@ -88,26 +86,10 @@ public class LiteratureService {
         }
     }
 
-    private enum LiteratureType {
+    enum LiteratureType {
         BOOK(1, "Book"),
         MANGA(2, "Manga"),
         ENCYCLOPEDIA(3, "Encyclopedia");
-
-        private static final Map<LiteratureType, List<String>> GENRES;
-
-        static {
-            EnumMap<LiteratureType, List<String>> map = new EnumMap<>(LiteratureType.class);
-            map.put(BOOK, List.of("Detektívka", "Klasika", "Román", "Rozprávka", "Sci-fi"));
-            map.put(MANGA, List.of("Josei", "Seinen", "Shojo", "Shonen", "Sports"));
-            map.put(ENCYCLOPEDIA, List.of(
-                    "Architektúra", "Astronómia", "Biologia", "Chémia", "Dinosaurus",
-                    "Ekonomika", "Film", "Filozofia", "Fyzika", "Geografia",
-                    "História", "Hudba", "Jazykoveda", "Kuchárska", "Literatúra",
-                    "Matematika", "Medicína", "Mytológia", "Náboženstvo", "Právo",
-                    "Príroda", "Psychológia", "Šport", "Technika", "Umenie",
-                    "Veda", "Vojenstvo", "Zdravie", "Zoológia"));
-            GENRES = Map.copyOf(map);
-        }
 
         private final int selectionCode;
         private final String typeName;
@@ -138,7 +120,7 @@ public class LiteratureService {
         if (genreSelection <= 0 || type.isEmpty()) {
             return Optional.empty();
         }
-        List<String> genres = LiteratureType.GENRES.getOrDefault(type.get(), List.of());
+        List<String> genres = GenreCatalog.GENRES.getOrDefault(type.get(), List.of());
         if (genreSelection > genres.size()) {
             return Optional.empty();
         }
