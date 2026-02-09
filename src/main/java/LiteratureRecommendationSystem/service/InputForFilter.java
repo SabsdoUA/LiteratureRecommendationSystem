@@ -25,7 +25,8 @@ public class InputForFilter {
         int selectionLiterature = readInt();
 
         if (selectionLiterature == 4) {
-            return new DataForFilter(selectionLiterature, user.getAge(), 0, RecencyCategory.NEW, user);
+            int ageRating = Math.min(user.getAge(), 18);
+            return new DataForFilter(selectionLiterature, ageRating, 0, RecencyCategory.NEW, user);
         }
 
         System.out.println(
