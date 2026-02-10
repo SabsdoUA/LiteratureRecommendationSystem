@@ -11,10 +11,15 @@ public class UserFactory {
     }
 
     public User create() {
-        System.out.println("Zadaj meno: ");
+        System.out.println("\nAhoj! \n" +
+                "Som tvoj osobný systém odporúčania literatúry. Pomôžem ti s výberom literatúry na čítanie. \n" +
+                "Položím ti niekoľko jednoduchých otázok a potom ti odporučím literatúru, \n" +
+                "ktorá by sa ti mohla páčiť. ʕ ᵔᴥᵔ ʔ\n");
+
+        System.out.println("Zadajte svoje meno: ");
         String name = scanner.nextLine();
 
-        System.out.println("Zadaj vek: ");
+        System.out.println("Koľko máš rokov?: ");
         int age = readInt();
 
         return new User(name, age);

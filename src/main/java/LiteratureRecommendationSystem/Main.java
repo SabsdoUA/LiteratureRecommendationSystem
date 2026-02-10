@@ -3,13 +3,13 @@ package LiteratureRecommendationSystem;
 import LiteratureRecommendationSystem.User.User;
 import LiteratureRecommendationSystem.User.UserFactory;
 import LiteratureRecommendationSystem.domain.Book;
+import LiteratureRecommendationSystem.domain.Manga;
 import LiteratureRecommendationSystem.domain.Encyclopedia;
 import LiteratureRecommendationSystem.domain.Literature;
-import LiteratureRecommendationSystem.domain.Manga;
-import LiteratureRecommendationSystem.repository.LiteratureRepository;
 import LiteratureRecommendationSystem.service.DataForFilter;
 import LiteratureRecommendationSystem.service.InputForFilter;
 import LiteratureRecommendationSystem.service.LiteratureService;
+import LiteratureRecommendationSystem.repository.LiteratureRepository;
 
 import java.util.List;
 import java.util.Scanner;
@@ -32,9 +32,9 @@ public class Main {
     }
 
     private static void printRecommendations(User user, List<Literature> recommendations) {
-        System.out.println("\nPre používateľa " + user.getName() + " je najvhodnejšie odporúčanie:");
+        System.out.println("\n(づ ◕‿◕ )づ " + user.getName() + ", toto je literatúra, ktorá by sa ti mohla páčiť:");
         if (recommendations.isEmpty()) {
-            System.out.println("Nenašli sa žiadne odporúčania pre zadané kritériá.");
+            System.out.println("Prepáč, ale nepodarilo sa mi nájsť nič, čo by zodpovedalo zadaným kategóriám. ~(>_<~))");
             return;
         }
         Literature literature = recommendations.get(0);

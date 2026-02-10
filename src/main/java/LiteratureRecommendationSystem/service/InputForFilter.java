@@ -16,8 +16,8 @@ public class InputForFilter {
 
     public DataForFilter create(User user) {
         System.out.println(
-                "Vyberte si typ literatúry, ktorú si želáte čítať.\n" +
-                        "Prosím, zadajte číslo, ktoré zodpovedá zvolenej možnosti:\n\n" +
+                "\nVyberte si typ literatúry, ktorú si želáte čítať.\n" +
+                        "Prosím, zadajte číslo, ktoré zodpovedá zvolenej možnosti:\n" +
                         "1. Knihy\n" +
                         "2. Manga\n" +
                         "3. Encyklopédie\n" +
@@ -30,7 +30,7 @@ public class InputForFilter {
         }
 
         System.out.println(
-                "Zadajte vekové hodnotenie literatúry, ktorú si želáte čítať.\n" +
+                "\nZadajte vekové hodnotenie literatúry, ktorú si želáte čítať.\n" +
                         "Prosím, zadajte iba číslo od 0 do 18 (napríklad: 12, 16, 18).");
         int ageRating = readInt();
 
