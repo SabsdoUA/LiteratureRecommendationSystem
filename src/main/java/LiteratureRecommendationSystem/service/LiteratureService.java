@@ -115,7 +115,7 @@ public class LiteratureService {
                     return Optional.of(type);
                 }
             }
-            return Optional.empty();
+            throw new IllegalArgumentException("Neplatná voľba typu literatúry: " + selection);
         }
     }
 

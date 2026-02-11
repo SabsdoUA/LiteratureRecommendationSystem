@@ -22,7 +22,7 @@ public class InputForFilter {
                         "2. Manga\n" +
                         "3. Encyklopédie\n" +
                         "4. Náhodný výber literatúry");
-        int selectionLiterature = readInt();
+        int selectionLiterature = readLiteratureSelection();
 
         if (selectionLiterature == 4) {
             int ageRating = Math.min(user.getAge(), 18);
@@ -95,6 +95,17 @@ public class InputForFilter {
             }
         }
     }
+
+    private int readLiteratureSelection() {
+        while (true) {
+            int selection = readInt();
+            if (selection >= 1 && selection <= 4) {
+                return selection;
+            }
+            System.out.println("Neplatná voľba typu literatúry. Skúste to znovu.");
+        }
+    }
+
     private int readAgeRating(User user) {
         while (true) {
             int ageRating = readInt();
