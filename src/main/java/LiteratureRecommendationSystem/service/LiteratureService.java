@@ -56,7 +56,7 @@ public class LiteratureService {
     private Predicate<Literature> buildEligibility(UserPreferences preferences) {
 
         Predicate<Literature> byAge = literature -> literature.getAgeLimit() <= preferences.userAge()
-                && literature.getAgeLimit() <= preferences.ageRating();
+                && literature.getAgeLimit() == preferences.ageRating();
 
         Predicate<Literature> byType = preferences.type()
                 .<Predicate<Literature>>map(type -> literature -> type.matches(literature))

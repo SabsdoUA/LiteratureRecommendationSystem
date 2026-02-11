@@ -32,7 +32,7 @@ public class InputForFilter {
         System.out.println(
                 "\nZadajte vekové hodnotenie literatúry, ktorú si želáte čítať.\n" +
                         "Prosím, zadajte iba číslo od 0 do 18 (napríklad: 12, 16, 18).");
-        int ageRating = readInt();
+        int ageRating = readAgeRating(user);
 
         Map<Integer, List<String>> genresByType = Map.of(
                 1, GenreCatalog.GENRES.getOrDefault(LiteratureService.LiteratureType.BOOK, List.of()),
@@ -93,6 +93,20 @@ public class InputForFilter {
                 default:
                     System.out.println("Neplatná voľba obdobia podľa roku vydania. Skúste znova.");
             }
+        }
+    }
+    private int readAgeRating(User user) {
+        while (true) {
+            int ageRating = readInt();
+            if (ageRating < 0 || ageRating > 18) {
+                System.out.println("Vekové hodnotenie musí byť v rozsahu od 0 do 18. Skúste znova.");
+                continue;
+            }
+            if (ageRating > user.getAge()) {
+                System.out.println("Nemôžete vybrať vyššie vekové hodnotenie než je váš vek. Skúste znova.");
+                continue;
+            }
+            return ageRating;
         }
     }
 }
